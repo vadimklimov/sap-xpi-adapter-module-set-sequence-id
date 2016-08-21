@@ -11,7 +11,7 @@
 			<remote>com.sap.aii.af.lib.mp.module.ModuleRemote</remote>
 			<local-home>com.sap.aii.af.lib.mp.module.ModuleLocalHome</local-home>
 			<local>com.sap.aii.af.lib.mp.module.ModuleLocal</local>
-			<ejb-class>com.doc.xpi.af.modules.SetSequenceIdBean</ejb-class>
+			<ejb-class>com.doc.xpi.af.modules.sequencer.SetSequenceIdBean</ejb-class>
 			<session-type>Stateless</session-type>
 			<transaction-type>Container</transaction-type>
 		</session>

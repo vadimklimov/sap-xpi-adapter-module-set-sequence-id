@@ -1,4 +1,4 @@
-package com.doc.xpi.af.modules.util;
+package com.doc.xpi.af.modules.sequencer.util;
 
 import com.sap.engine.interfaces.messaging.api.MessageKey;
 import com.sap.engine.interfaces.messaging.api.PublicAPIAccessFactory;

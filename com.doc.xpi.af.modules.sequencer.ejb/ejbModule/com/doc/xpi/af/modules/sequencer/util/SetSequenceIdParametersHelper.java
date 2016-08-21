@@ -1,4 +1,4 @@
-package com.doc.xpi.af.modules.util;
+package com.doc.xpi.af.modules.sequencer.util;
 
 import java.util.ArrayList;
 import java.util.Enumeration;

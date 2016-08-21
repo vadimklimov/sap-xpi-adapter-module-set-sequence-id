@@ -1,4 +1,4 @@
-package com.doc.xpi.af.modules;
+package com.doc.xpi.af.modules.sequencer;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,8 +19,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.doc.xpi.af.modules.util.AuditLogHelper;
-import com.doc.xpi.af.modules.util.SetSequenceIdParametersHelper;
+import com.doc.xpi.af.modules.sequencer.util.AuditLogHelper;
+import com.doc.xpi.af.modules.sequencer.util.SetSequenceIdParametersHelper;
 import com.sap.aii.af.lib.mp.module.Module;
 import com.sap.aii.af.lib.mp.module.ModuleContext;
 import com.sap.aii.af.lib.mp.module.ModuleData;
