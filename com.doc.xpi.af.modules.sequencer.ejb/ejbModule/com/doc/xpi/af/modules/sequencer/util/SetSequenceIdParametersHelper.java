@@ -11,7 +11,6 @@ import com.sap.aii.af.lib.mp.module.ModuleContext;
 public class SetSequenceIdParametersHelper {
 
 	public static final String PARAMETER_TERMINATE_IF_ERROR = "error.terminate";
-	public static final String PARAMETER_ERROR_IF_MULTIPLE_VALUES = "multipleValues.error";
 	public static final String PARAMETER_XPATH = "xpath";
 	public static final String PARAMETER_SEQ_ID_LEADING_CHAR_DELETE = "sequenceId.deleteLeadingCharacter";
 	public static final String PARAMETER_SEQ_ID_LEADING_CHAR = "sequenceId.leadingCharacter";
@@ -22,7 +21,6 @@ public class SetSequenceIdParametersHelper {
 
 	public boolean isParameterError;
 	public boolean isTerminateIfError;
-	public boolean isErrorIfMultipleValues;
 	public boolean isDeleteLeadingChar;
 	public boolean isReplaceInvalidChar;
 	public boolean isTruncateStart;
@@ -46,7 +44,6 @@ public class SetSequenceIdParametersHelper {
 		// Set default values
 		this.isParameterError = false;
 		this.isTerminateIfError = true;
-		this.isErrorIfMultipleValues = true;
 		this.isTruncateStart = false;
 		this.isTruncateEnd = false;
 		this.isDeleteLeadingChar = false;
@@ -64,16 +61,13 @@ public class SetSequenceIdParametersHelper {
 
 		Map<String, String> channelParameters = new HashMap<String, String>();
 
-		Enumeration<?> channelConfigParameters = moduleContext
-				.getContextDataKeys();
+		Enumeration<?> channelConfigParameters = moduleContext.getContextDataKeys();
 		String channelConfigParameterName;
 		String channelConfigParameterValue;
 
 		while (channelConfigParameters.hasMoreElements()) {
-			channelConfigParameterName = (String) channelConfigParameters
-					.nextElement();
-			channelConfigParameterValue = moduleContext
-					.getContextData(channelConfigParameterName);
+			channelConfigParameterName = (String) channelConfigParameters.nextElement();
+			channelConfigParameterValue = moduleContext.getContextData(channelConfigParameterName);
 			channelParameters.put(channelConfigParameterName,
 					channelConfigParameterValue);
 		}
@@ -88,26 +82,15 @@ public class SetSequenceIdParametersHelper {
 
 			// Parameters related to module processing termination
 			if (parameter.getKey().equals(PARAMETER_TERMINATE_IF_ERROR)) {
-				if (!ParameterInputValueChecker.isNullOrEmpty(parameter
-						.getValue())) {
+				if (!ParameterInputValueChecker.isNullOrEmpty(parameter.getValue())) {
 					this.isTerminateIfError = convertBoolean(
-							ParameterInputValueChecker.isTrueOrFalse(parameter
-									.getValue()), true);
-				}
-
-			} else if (parameter.getKey().equals(
-					PARAMETER_ERROR_IF_MULTIPLE_VALUES)) {
-				if (!ParameterInputValueChecker.isNullOrEmpty(parameter
-						.getValue())) {
-					this.isErrorIfMultipleValues = convertBoolean(
-							ParameterInputValueChecker.isTrueOrFalse(parameter
-									.getValue()), true);
+							ParameterInputValueChecker.isTrueOrFalse(parameter.getValue()),
+							true);
 				}
 
 				// Parameters related to XPath expression
 			} else if (parameter.getKey().equals(PARAMETER_XPATH)) {
-				if (!ParameterInputValueChecker.isNullOrEmpty(parameter
-						.getValue())) {
+				if (!ParameterInputValueChecker.isNullOrEmpty(parameter.getValue())) {
 					this.xPath = parameter.getValue().trim();
 				} else {
 					this.isParameterError = true;
@@ -116,19 +99,14 @@ public class SetSequenceIdParametersHelper {
 				// Parameters related to leading symbols
 			} else if (parameter.getKey().equals(
 					PARAMETER_SEQ_ID_LEADING_CHAR_DELETE)) {
-				if (!ParameterInputValueChecker.isNullOrEmpty(parameter
-						.getValue())) {
+				if (!ParameterInputValueChecker.isNullOrEmpty(parameter.getValue())) {
 					this.isDeleteLeadingChar = convertBoolean(
-							ParameterInputValueChecker.isTrueOrFalse(parameter
-									.getValue()), false);
+							ParameterInputValueChecker.isTrueOrFalse(parameter.getValue()),
+							false);
 
 					if (this.isDeleteLeadingChar) {
-						if (!ParameterInputValueChecker
-								.isNullOrEmpty(parameters
-										.get(PARAMETER_SEQ_ID_LEADING_CHAR))) {
-							this.leadingChar = ParameterInputValueChecker
-									.getLeadingCharacter(parameters
-											.get(PARAMETER_SEQ_ID_LEADING_CHAR));
+						if (!ParameterInputValueChecker.isNullOrEmpty(parameters.get(PARAMETER_SEQ_ID_LEADING_CHAR))) {
+							this.leadingChar = ParameterInputValueChecker.getLeadingCharacter(parameters.get(PARAMETER_SEQ_ID_LEADING_CHAR));
 						} else {
 							this.isDeleteLeadingChar = false;
 						}
@@ -138,17 +116,15 @@ public class SetSequenceIdParametersHelper {
 				// Parameters related to replacement of invalid characters
 			} else if (parameter.getKey().equals(
 					PARAMETER_SEQ_ID_REPLACE_INVALID_CHARS)) {
-				if (!ParameterInputValueChecker.isNullOrEmpty(parameter
-						.getValue())) {
+				if (!ParameterInputValueChecker.isNullOrEmpty(parameter.getValue())) {
 					this.isReplaceInvalidChar = convertBoolean(
-							ParameterInputValueChecker.isTrueOrFalse(parameter
-									.getValue()), false);
+							ParameterInputValueChecker.isTrueOrFalse(parameter.getValue()),
+							false);
 				}
 
 				// Parameters related to truncation
 			} else if (parameter.getKey().equals(PARAMETER_SEQ_ID_TRUNCATE)) {
-				if (!ParameterInputValueChecker.isNullOrEmpty(parameter
-						.getValue())) {
+				if (!ParameterInputValueChecker.isNullOrEmpty(parameter.getValue())) {
 					if (parameter.getValue().trim().equalsIgnoreCase("start")) {
 						this.isTruncateStart = true;
 						this.isTruncateEnd = false;
@@ -167,21 +143,19 @@ public class SetSequenceIdParametersHelper {
 
 				// Parameters related to affix
 			} else if (parameter.getKey().equals(PARAMETER_SEQ_ID_PREFIX)) {
-				if (!ParameterInputValueChecker.isNullOrEmpty(parameters
-						.get(PARAMETER_SEQ_ID_PREFIX))) {
+				if (!ParameterInputValueChecker.isNullOrEmpty(parameters.get(PARAMETER_SEQ_ID_PREFIX))) {
 					this.isAddPrefix = true;
 					this.prefix = parameters.get(PARAMETER_SEQ_ID_PREFIX)
-							.trim();
+											.trim();
 				} else {
 					this.isAddPrefix = false;
 				}
 
 			} else if (parameter.getKey().equals(PARAMETER_SEQ_ID_SUFFIX)) {
-				if (!ParameterInputValueChecker.isNullOrEmpty(parameters
-						.get(PARAMETER_SEQ_ID_SUFFIX))) {
+				if (!ParameterInputValueChecker.isNullOrEmpty(parameters.get(PARAMETER_SEQ_ID_SUFFIX))) {
 					this.isAddSuffix = true;
 					this.suffix = parameters.get(PARAMETER_SEQ_ID_SUFFIX)
-							.trim();
+											.trim();
 				} else {
 					this.isAddSuffix = false;
 				}
