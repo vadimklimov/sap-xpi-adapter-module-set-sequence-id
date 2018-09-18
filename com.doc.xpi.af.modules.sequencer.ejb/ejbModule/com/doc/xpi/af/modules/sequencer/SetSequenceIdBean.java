@@ -162,10 +162,34 @@ public class SetSequenceIdBean implements Module {
 
 		try {
 			DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+			documentFactory.setNamespaceAware(true);
 			DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(inputStream);
 			XPathFactory xPathFactory = XPathFactory.newInstance();
 			XPath xPath = xPathFactory.newXPath();
+			xPath.setNamespaceContext( new NamespaceContext() {
+			    public String getNamespaceURI(String prefix) {
+			      if(prefix.equals("ns0")) {
+			    	  return "http://schemas.example.com/shemas/common";
+			       }
+			      return null;
+			    }
+
+				@Override
+				public String getPrefix(String namespaceURI) {
+					// Not sneeded in this context
+					if(namespaceURI.equals("http://schemas.example.com/shemas/common") {
+				    	  return "ns0";
+				    }
+					return null;
+				}
+
+		     	@Override
+				public Iterator getPrefixes(String arg0) {
+					// Not neededed in this context
+					return null;
+				}
+			});
 			XPathExpression xPathExpression = xPath.compile(xPathExpressionValue);
 			value = (String) xPathExpression.evaluate(document,
 					XPathConstants.STRING);
