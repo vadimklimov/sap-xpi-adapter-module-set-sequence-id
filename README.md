@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This repository has been archived and is no longer maintained.
+
 # SAP PI/PO: Adapter module SetSequenceIdBean
 Custom adapter module for Adapter Engine of SAP PI/PO systems to set dynamic sequence ID of the processed message.
 
